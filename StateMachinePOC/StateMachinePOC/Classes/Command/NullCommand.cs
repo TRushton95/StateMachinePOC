@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StateMachinePOC.Classes.Command
 {
-    class MoveRightCommand : ICommand
+    class NullCommand : ICommand
     {
         public void execute(Dummy dummy)
         {
@@ -15,7 +15,7 @@ namespace StateMachinePOC.Classes.Command
 
         public string commandType()
         {
-            return "MoveRight";
+            return "Null";
         }
     }
 }

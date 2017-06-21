@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Input;
+using StateMachinePOC.Classes.AbilityFilters;
 using StateMachinePOC.Classes.Command;
 using StateMachinePOC.Classes.States;
 using System;
@@ -25,6 +26,8 @@ namespace StateMachinePOC.Classes
         public List<ICommand> commands { get; set; }
         public List<ICommand> input { get; set; }
 
+        public IFilter filter { get; set; }
+
         public Dummy()
         {
             KeyDownD = new MoveLeftCommand();
@@ -34,6 +37,7 @@ namespace StateMachinePOC.Classes
             KeyDownP = new RootEffect();
 
             movementState = new StandingState();
+            filter = null; //filter
         }
 
         public List<ICommand> processInput()
@@ -74,6 +78,11 @@ namespace StateMachinePOC.Classes
         public void update()
         {
             input = processInput();
+
+            if (filter != null) //could use null filter but this is more efficient
+            {
+                filter.filter(input);
+            }
 
             foreach (ICommand c in input)
             {
